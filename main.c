@@ -36,13 +36,9 @@ int main()
 		while(i<4)
 		{
 			written[i] = keypadScan();
-			if (written[i] != 'E')
-			{
-				
-				// Recheck if a button is pressed
-				i++;
-				_delay_ms(2500);
-			}
+			// Recheck if a button is pressed
+			i++;
+			_delay_ms(2500);
 			//Delay 3ashan mysglsh nfs el rkm mrtin(aw aktr y3ni)
 		}
 		if (strcmp(pass,written) == 0)
