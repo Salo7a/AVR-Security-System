@@ -20,11 +20,13 @@ uint8_t tries = 0;
 char written[5];
 int main()
 {
+	MCUCSR=(1<<JTD);
+	MCUCSR=(1<<JTD);
 	char pass[5] = "1234";
 	written[4] = '\0';
 	//By5ali written string mn 4 7orof 3ashan ast3ml functions el string,'\0' m3naha en kol elly ableh string
 	DDRB=0xff; //Red LED,Buzzer(lw hn7ot)
-	DDRC=0b00000111;  //BiColor LED(Red-Green)(0b00000010 tnwr RED~~0b00000001 tnwr Green)(Fara8)
+	DDRC=0b00001111;  //BiColor LED(Red-Green)(0b00000010 tnwr RED~~0b00000001 tnwr Green)(Fara8)
 	
 
 	uint8_t i;
@@ -38,7 +40,7 @@ int main()
 			written[i] = keypadScan();
 			// Recheck if a button is pressed
 			i++;
-			_delay_ms(2500);
+			_delay_ms(500);
 			//Delay 3ashan mysglsh nfs el rkm mrtin(aw aktr y3ni)
 		}
 		if (strcmp(pass,written) == 0)
@@ -78,10 +80,10 @@ char keypadScan()
 			{
 				if(!(KeypadVal & (0X08>>r)))
 				{
-					if(r==0 && c==0)return'1';
-					if(r==0 && c==1)return'2';
-					if(r==0 && c==2)return'3';
-					if(r==0 && c==3)return'A';
+					if(r==0 && c==0)return'A';
+					if(r==0 && c==1)return'1';
+					if(r==0 && c==2)return'2';
+					if(r==0 && c==3)return'3';
 					if(r==1 && c==0)return'4';
 					if(r==1 && c==1)return'5';
 					if(r==1 && c==2)return'6';
