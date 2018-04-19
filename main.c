@@ -678,27 +678,27 @@ int main()
 			if (count>35)
 			{
 				LCD_String("On");
-				PORTC |= 0b00001000;
-				PORTB = 0b00001111;
-				PORTA &= 0b00111111;
-				PORTA |= 0b00100000;
+// 				PORTC |= 0b00001000;
+// 				PORTB = 0b00001111;
+// 				PORTA &= 0b00111111;
+// 				PORTA |= 0b00100000;
 				
 			}
 			else if (count<35 && count>20)
 			{
 				LCD_String("Off");
-				PORTC &= 0b11110111;
-				PORTB = 0;
-				PORTA &= 0b01011111;
-				PORTA |= 0b01000000;
+// 				PORTC &= 0b11110111;
+// 				PORTB = 0;
+// 				PORTA &= 0b01011111;
+// 				PORTA |= 0b01000000;
 			}
 			else
 			{
 				LCD_String("Off");
-				PORTA &= 0b10011111;
-				PORTA |= 0b10000000;
-				PORTC &= 0b11110111;
-				PORTB = 0;
+// 				PORTA &= 0b10011111;
+// 				PORTA |= 0b10000000;
+// 				PORTC &= 0b11110111;
+// 				PORTB = 0;
 			}
 			_delay_ms(800);
 			KeypadDirectionRegister|=(0X80>>3);
@@ -800,43 +800,45 @@ void wrong()
 	if (tries==1)
 	{
 		LCD_String("4");
-// 		PORTA = 0x01;
-// 		_delay_ms(500);
-// 		PORTB = 0x00;
-// 		_delay_ms(500);
-// 		PORTB = 0x01;
+		PORTB |= 0b00000100;
+		_delay_ms(400);
+		PORTB &= 0b11111011;
+		_delay_ms(400);
+		PORTB |= 0b00000100;
 	}
 	if (tries==2)
 	{
 		LCD_String("3");
-// 		PORTB = 0x03;
-// 		_delay_ms(500);
-// 		PORTB = 0x01;
-// 		_delay_ms(500);
-// 		PORTB = 0x03;
-// 		
+		PORTB |= 0b00001000;
+		_delay_ms(400);
+		PORTB &= 0b11110111;
+		_delay_ms(400);
+		PORTB |= 0b00001000;	
 	}
 	if (tries==3)
 	{
 		LCD_String("2");
-// 		PORTB = 0x07;
-// 		_delay_ms(500);
-// 		PORTB = 0x03;
-// 		_delay_ms(500);
-// 		PORTB = 0x07;
-		
-		
+		PORTA |= 0b00100000;
+		_delay_ms(400);
+		PORTA &= 0b11011111;
+		_delay_ms(400);
+		PORTA |= 0b00100000;
 	}
 	if (tries==4)
 	{
 		LCD_String("1");
-// 		PORTB = 0x0F;
-// 		_delay_ms(500);
-// 		PORTB = 0x07;
-// 		_delay_ms(500);
-// 		PORTB = 0x0F;
+		PORTA |= 0b01000000;
+		_delay_ms(400);
+		PORTA &= 0b10111111;
+		_delay_ms(400);
+		PORTA |= 0b01000000;
 	}
 	if (tries == 5)
+		PORTA |= 0b10000000;
+		_delay_ms(300);
+		PORTA &= 0b01111111;
+		_delay_ms(300);
+		PORTA |= 0b10000000;
 	{
 	for (int i=0;i<30;i++)
 	{
@@ -846,7 +848,41 @@ void wrong()
 		itoa(30-i,ti,10);
 		LCD_String(ti);
 		_delay_ms(1000);
-		
+		if (i%2==0)
+		{
+			PORTA |= 0b10000000;
+			_delay_ms(200);
+			PORTA &= 0b01111111;
+			PORTA |= 0b01000000;
+			_delay_ms(200);
+			PORTA &= 0b10111111;
+			PORTA |= 0b00100000;
+			_delay_ms(200);
+			PORTA &= 0b11011111;
+			PORTB |= 0b00001000;
+			_delay_ms(200);
+			PORTB &= 0b11110111;
+			PORTB |= 0b00000100;
+			_delay_ms(200);
+		}
+		else
+		{
+			PORTB |= 0b00000100;
+			_delay_ms(200);
+			PORTB &= 0b11111011;
+			PORTB |= 0b00001000;
+			_delay_ms(200);
+			PORTB &= 0b11110111;
+			PORTA |= 0b00100000;
+			_delay_ms(200);
+			PORTA &= 0b11011111;
+			PORTA |= 0b01000000;
+			_delay_ms(200);
+			PORTA &= 0b10111111;
+			PORTA |= 0b10000000;
+			
+		}
+		PORTA &= 0b01111111;
 	}
 // 		PORTB = 0x1F;
 // 		_delay_ms(500);
